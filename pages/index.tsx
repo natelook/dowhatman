@@ -1,46 +1,44 @@
-import type { NextPage } from 'next';
 import React from 'react';
 import Image from 'next/image';
-import { FaTwitter, FaDiscord } from 'react-icons/fa';
-import Link from 'next/link';
-import Head from 'next/head';
+import sanity, { urlFor } from '@lib/sanity';
+import groq from 'groq';
 
-const Home: NextPage = () => {
+interface HomeProps {
+  data: {
+    _id: string;
+    name: string;
+    image: string;
+  }[];
+}
+
+const fetcher = async () => await sanity.fetch(groq`*[_type == 'robsart']`);
+
+export default function Home({ data }: HomeProps) {
   return (
     <React.Fragment>
-      <Head>
-        <link href="/favicon.ico" rel="icon" />
-        <title>DO WHAT MAN! NFT Collection</title>
-      </Head>
-      <div className="flex h-screen w-screen justify-center items-center bg-black">
-        <div>
-          <div className="flex justify-center mb-3">
-            <Image
-              src="/DoWhatMan_logo.svg"
-              height="100px"
-              width="230"
-              alt="hello"
-            />
-          </div>
-          <p className="text-white text-xl text-center font-bold tracking-widest uppercase">
-            NFT Collection Coming Soon
-          </p>
-          <div className="text-white text-3xl flex mt-5 justify-center space-x-5">
-            <Link href="https://twitter.com/DO_WHAT_MAN">
-              <a>
-                <FaTwitter />
-              </a>
-            </Link>
-            <Link href="https://discord.gg/kBH8EV53CG">
-              <a>
-                <FaDiscord />
-              </a>
-            </Link>
-          </div>
+      <section className="max-w-5xl mx-auto my-20">
+        <h2 className="text-3xl text-center font-bold tracking-widest uppercase mb-10">
+          NFT Collection Coming Soon
+        </h2>
+        <div className="grid grid-cols-3 place-items-center gap-5">
+          {data.map(item => (
+            <div key={item._id} className="w-full border">
+              <Image
+                src={`${urlFor(item.image).url()}`}
+                height="350px"
+                width="350px"
+                layout="responsive"
+                alt={item.name}
+              />
+            </div>
+          ))}
         </div>
-      </div>
+      </section>
     </React.Fragment>
   );
-};
+}
 
-export default Home;
+export async function getStaticProps() {
+  const data = await fetcher();
+  return { props: { data } };
+}
