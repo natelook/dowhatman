@@ -2,7 +2,7 @@ import sanityClient from '@sanity/client';
 import imageUrlBuilder from '@sanity/image-url';
 
 const config = {
-  projectId: '500giqho',
+  projectId: 'gruf8wjr',
   dataset: 'production',
   apiVersion: '2021-03-25',
   useCdn: process.env.NODE_ENV !== 'production' ? false : true,

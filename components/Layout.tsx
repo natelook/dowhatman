@@ -1,13 +1,9 @@
-import React from 'react';
+import React, { FC } from 'react';
 import Footer from './Footer';
 import Meta from './Meta';
 import Nav from './Nav';
 
-interface LayoutProps {
-  children: React.ReactChild;
-}
-
-export default function Layout({ children }: LayoutProps) {
+const Layout: FC = ({ children }) => {
   return (
     <React.Fragment>
       <Meta />
@@ -16,4 +12,6 @@ export default function Layout({ children }: LayoutProps) {
       <Footer />
     </React.Fragment>
   );
-}
+};
+
+export default Layout;

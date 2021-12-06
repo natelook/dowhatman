@@ -4,20 +4,38 @@ import Link from 'next/link';
 export default function Footer() {
   return (
     <footer className="bg-black text-white mt-5">
-      <div className="max-w-5xl mx-auto py-10">
-        <p className="text-center mb-5">&copy; 2021 builtbynate</p>
-        <div className="text-3xl flex justify-center space-x-5">
+      <div className="container mx-auto py-10 grid grid-cols-3 place-items-center text-base">
+        <div className="text-base flex justify-center items-center space-x-5">
+          <Link href="/">
+            <a className="footer-link">Home</a>
+          </Link>
+          <Link href="/articles">
+            <a className="footer-link">Articles</a>
+          </Link>
+          <Link href="/whitepaper">
+            <a className="footer-link">Whitepaper</a>
+          </Link>
           <Link href="https://twitter.com/DO_WHAT_MAN">
-            <a className="hover:text-blue-400 transition-colors duration-200">
+            <a className="footer-link">
               <FaTwitter />
             </a>
           </Link>
           <Link href="https://discord.gg/kBH8EV53CG">
-            <a className="hover:text-blue-700 transition-colors duration-200">
+            <a className="footer-link">
               <FaDiscord />
             </a>
           </Link>
         </div>
+        <p className="text-center uppercase text-sm">
+          &copy; 2021 Do What Man!
+        </p>
+        <p>
+          Built by{' '}
+          <Link href="https://natelook.com">
+            <a className="text-green">natelook.eth</a>
+          </Link>
+          .
+        </p>
       </div>
     </footer>
   );

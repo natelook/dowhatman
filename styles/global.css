@@ -1,0 +1,18 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,400;0,700;1,400&family=Staatliches&display=swap');
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  body {
+    @apply bg-black text-white overflow-x-hidden;
+  }
+
+  .footer-link {
+    @apply text-green font-headings;
+  }
+
+  article p {
+    @apply mb-3 text-lg;
+  }
+}
