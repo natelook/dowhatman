@@ -1,10 +1,14 @@
 import { FaDiscord, FaTwitter } from 'react-icons/fa';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import Link from 'next/link';
 import SlideOver from './SlideOver';
+import useENSName from '../hooks/useENSName';
+import { useWeb3React } from '@web3-react/core';
+import Wallet from './Wallet';
 
 export default function Nav() {
   const [isMenuOpen, setMenuOpen] = useState(false);
+
   return (
     <React.Fragment>
       <div className="bg-black  fixed w-full z-40 drop-shadow-lg">
@@ -32,9 +36,7 @@ export default function Nav() {
                   <FaTwitter />
                 </a>
               </Link>
-              <button className="bg-black border border-yellow text-yellow uppercase font-bold  text-sm rounded-md px-4 py-1 hover:text-black hover:bg-yellow transition duration-200">
-                Connect Wallet
-              </button>
+              <Wallet />
             </div>
           </div>
         </div>

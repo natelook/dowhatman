@@ -15,4 +15,8 @@
   article p {
     @apply mb-3 text-lg;
   }
+
+  .wallet-button {
+    @apply bg-black border border-yellow text-yellow uppercase font-bold  text-sm rounded-md px-4 py-1 hover:text-black hover:bg-yellow transition duration-200;
+  }
 }
