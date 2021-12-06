@@ -19,7 +19,7 @@ export default function HomeHeroText() {
         transition={{ delay: 0.5, duration: 0.5 }}
       >
         <h3 className="text-3xl max-w-lg mx-auto">
-          A collection to fulfill the needs and desires of other people.
+          A collection to fulfill the needs and desires of others.
         </h3>
         <div className="flex justify-center mt-5">
           <a

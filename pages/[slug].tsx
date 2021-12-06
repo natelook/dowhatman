@@ -40,7 +40,7 @@ export async function getStaticPaths() {
   const paths = posts.map((post: { slug: string }) => ({
     params: { slug: post.slug },
   }));
-  return { paths, fallback: false };
+  return { paths, fallback: 'blocking' };
 }
 
 export async function getStaticProps({ params }: GetServerSidePropsContext) {
@@ -53,5 +53,5 @@ export async function getStaticProps({ params }: GetServerSidePropsContext) {
     }`,
     { slug: params?.slug },
   );
-  return { props: { post } };
+  return { props: { post, revalidate: 10 } };
 }
