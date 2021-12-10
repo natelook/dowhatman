@@ -76,13 +76,13 @@ export default function Home() {
                 Do What Man! was a product of need vs desire. in 2021, Rob had a
                 stroke. This affected his way of living drastically. He now has
                 to relearn how to speak, walk, draw, write... everything. NFTs
-                have now given Rob the opportunity to share and distrubute his
+                have now given Rob the opportunity to share and distribute his
                 work in a way he was never able to in the past.
               </p>
               <p>
                 The initial collection will launch with 1,000 NFTs which will
                 grant you ownership to the Do What Man! DAO. This DAO will act
-                as a governance to display and distrubte the work of other
+                as a governance to display and distribute the work of other
                 artists who also have a need and a desire.
               </p>
             </div>

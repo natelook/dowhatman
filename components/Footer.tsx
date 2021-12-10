@@ -9,9 +9,6 @@ export default function Footer() {
           <Link href="/">
             <a className="footer-link">Home</a>
           </Link>
-          <Link href="/articles">
-            <a className="footer-link">Articles</a>
-          </Link>
           <Link href="/whitepaper">
             <a className="footer-link">Whitepaper</a>
           </Link>

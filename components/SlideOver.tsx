@@ -61,11 +61,6 @@ export default function SlideOver({
                           </Link>
                         </li>
                         <li>
-                          <Link href="/articles">
-                            <a>Articles</a>
-                          </Link>
-                        </li>
-                        <li>
                           <Link href="/whitepaper">
                             <a>Whitepaper</a>
                           </Link>
