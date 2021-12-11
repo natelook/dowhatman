@@ -21,9 +21,11 @@ export default function Nav() {
               </div>
               {pathname !== '/' && (
                 <Link href="/">
-                  <h1 className="text-3xl mt-0.5 font-headings">
-                    <LogoText />
-                  </h1>
+                  <a>
+                    <h1 className="text-3xl mt-0.5 font-headings">
+                      <LogoText />
+                    </h1>
+                  </a>
                 </Link>
               )}
             </div>
