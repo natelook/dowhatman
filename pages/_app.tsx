@@ -7,18 +7,32 @@ import type {
   JsonRpcFetchFunc,
 } from '@ethersproject/providers';
 import { Web3Provider } from '@ethersproject/providers';
+import { RecoilRoot } from 'recoil';
+import { useRouter } from 'next/router';
+import { LayoutGroup } from 'framer-motion';
 
 function getLibrary(provider: ExternalProvider | JsonRpcFetchFunc) {
   return new Web3Provider(provider);
 }
 
 function MyApp({ Component, pageProps }: AppProps) {
+  const { pathname } = useRouter();
   return (
-    <Web3ReactProvider getLibrary={getLibrary}>
-      <Layout>
-        <Component {...pageProps} />
-      </Layout>
-    </Web3ReactProvider>
+    <LayoutGroup>
+      <Web3ReactProvider getLibrary={getLibrary}>
+        <RecoilRoot>
+          <Layout>
+            {pathname !== '/' ? (
+              <div className="py-24 max-w-3xl mx-auto">
+                <Component {...pageProps} />
+              </div>
+            ) : (
+              <Component {...pageProps} />
+            )}
+          </Layout>
+        </RecoilRoot>
+      </Web3ReactProvider>
+    </LayoutGroup>
   );
 }
 

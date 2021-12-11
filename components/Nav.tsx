@@ -1,21 +1,31 @@
 import { FaDiscord, FaTwitter } from 'react-icons/fa';
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import Link from 'next/link';
 import SlideOver from './SlideOver';
-import useENSName from '../hooks/useENSName';
-import { useWeb3React } from '@web3-react/core';
 import Wallet from './Wallet';
+import LogoText from '@components/LogoText';
+import { useRouter } from 'next/router';
 
 export default function Nav() {
   const [isMenuOpen, setMenuOpen] = useState(false);
+  const { pathname } = useRouter();
 
   return (
     <React.Fragment>
       <div className="bg-black  fixed w-full z-40 drop-shadow-lg">
         <div className="container mx-auto py-2">
           <div className="flex justify-between items-center">
-            <div onClick={() => setMenuOpen(true)}>
-              <Hamburger />
+            <div className="flex items-center space-x-3">
+              <div onClick={() => setMenuOpen(true)}>
+                <Hamburger />
+              </div>
+              {pathname !== '/' && (
+                <Link href="/">
+                  <h1 className="text-3xl mt-0.5 font-headings">
+                    <LogoText />
+                  </h1>
+                </Link>
+              )}
             </div>
             <div className="text-2xl flex space-x-5 items-center">
               <Link href="https://discord.gg/kBH8EV53CG">

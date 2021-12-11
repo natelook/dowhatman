@@ -29,6 +29,23 @@ contract DoWhatManNFT is ERC721Enumerable, Ownable {
     return baseURI;
   }
 
+   function mint(uint256 _mintAmount) public payable {
+    uint256 supply = totalSupply();
+    require(!paused, "mint is not paused");
+    require(_mintAmount > 0, "mint amount must be greater than 0");
+    require(
+        _mintAmount <= maxMintAmount,
+        "mint amount must be less than or equal to max mint amount"
+    );
+    require(supply + _mintAmount <= maxSupply, "not enough supply");
+
+    require(msg.value >= cost * _mintAmount, "not enough ether sent");
+
+    for (uint256 i = 1; i <= _mintAmount; i++) {
+        _safeMint(msg.sender, supply + i);
+    }
+  }
+
   function walletOfOwner(address _owner)
     public
     view

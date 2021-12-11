@@ -39,3 +39,4 @@ yarn-error.log*
 # web3 stuff
 /artifacts
 /cache
+/nfts

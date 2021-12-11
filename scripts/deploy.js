@@ -15,7 +15,10 @@ async function main() {
 
   // We get the contracts to deploy
   const NFT = await hre.ethers.getContractFactory('DoWhatManNFT');
-  const nft = await NFT.deploy('test', 'test');
+  const nft = await NFT.deploy(
+    'https://dowhatman.mypinata.cloud/ipfs/QmcpNMR9ML383zAvig2isFWLiSDPquozryFNdEjVrZw8sv/',
+    'https://dowhatman.mypinata.cloud/ipfs/QmcpNMR9ML383zAvig2isFWLiSDPquozryFNdEjVrZw8sv/1.json',
+  );
   await nft.deployed();
   console.log('NFT deployed to:', nft.address);
 }

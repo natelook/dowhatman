@@ -1,18 +1,19 @@
+import LogoText from '@components/LogoText';
 import { motion } from 'framer-motion';
 import { FaDiscord } from 'react-icons/fa';
 
 export default function HomeHeroText() {
   return (
     <div className="text-center">
-      <motion.span
+      <motion.h1
         initial={{ opacity: 0, y: -50 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ delay: 0.2, duration: 0.5 }}
         className="text-green font-headings text-9xl "
         layoutId="homeHeading"
       >
-        DO WHAT MAN!
-      </motion.span>
+        <LogoText />
+      </motion.h1>
       <motion.div
         initial={{ opacity: 0, y: 50 }}
         animate={{ opacity: 1, y: 0 }}
