@@ -7,9 +7,11 @@ import type {
   JsonRpcFetchFunc,
 } from '@ethersproject/providers';
 import { Web3Provider } from '@ethersproject/providers';
-import { RecoilRoot } from 'recoil';
+import { RecoilRoot, useSetRecoilState } from 'recoil';
 import { useRouter } from 'next/router';
 import { LayoutGroup } from 'framer-motion';
+import { useEffect } from 'react';
+import { walletState } from '@components/state';
 
 function getLibrary(provider: ExternalProvider | JsonRpcFetchFunc) {
   return new Web3Provider(provider);
@@ -17,6 +19,7 @@ function getLibrary(provider: ExternalProvider | JsonRpcFetchFunc) {
 
 function MyApp({ Component, pageProps }: AppProps) {
   const { pathname } = useRouter();
+
   return (
     <LayoutGroup>
       <Web3ReactProvider getLibrary={getLibrary}>

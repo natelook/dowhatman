@@ -19,4 +19,25 @@
   .wallet-button {
     @apply bg-black border border-yellow text-yellow uppercase font-bold  text-sm rounded-md px-4 py-1 hover:text-black hover:bg-yellow transition duration-200;
   }
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    @apply font-headings;
+  }
+
+  h1 {
+    @apply text-6xl text-purple;
+  }
+
+  h2 {
+    @apply text-3xl text-green;
+  }
+
+  .btn {
+    @apply px-3 py-1 bg-yellow text-black uppercase rounded hover:bg-black hover:text-yellow border border-yellow transition duration-200;
+  }
 }

@@ -1,66 +1,41 @@
-import { useWeb3React } from '@web3-react/core';
-import { useEffect, useState } from 'react';
-import useENSName from '../hooks/useENSName';
+import useENSName from '@hooks/useENSName';
+import requestAccount from '@lib/request-account';
+import { ethers } from 'ethers';
+import { useEffect } from 'react';
+import { useRecoilState } from 'recoil';
 import { shortenHex } from 'utils';
-import { injected } from '../connectors';
-import { UserRejectedRequestError } from '@web3-react/injected-connector';
-import useMetaMaskOnboarding from 'hooks/useMetaMaskOnboarding';
+import { walletState } from './state';
 
 export default function Wallet() {
-  const { active, error, activate, chainId, account, setError } =
-    useWeb3React();
+  const [wallet, setWallet] = useRecoilState(walletState);
+  const ENSName = useENSName(wallet);
 
-  const {
-    isMetaMaskInstalled,
-    isWeb3Available,
-    startOnboarding,
-    stopOnboarding,
-  } = useMetaMaskOnboarding();
+  async function connectWallet() {
+    if (typeof window.ethereum === undefined) return;
 
-  const [connecting, setConnecting] = useState(false);
-  useEffect(() => {
-    if (active || error) {
-      setConnecting(false);
-      stopOnboarding();
-    }
-  }, [active, error, stopOnboarding]);
-
-  const ENSName = useENSName(account);
-  console.log({ account });
-
-  if (error) {
-    return null;
+    if (window.ethereum.networkVersion !== 1)
+      alert(
+        `You are not on mainet. You are on ${window.ethereum.networkVersion}`,
+      );
+    await requestAccount();
+    const provider = new ethers.providers.Web3Provider(window.ethereum);
+    const accounts = await provider.listAccounts();
+    console.log(accounts);
+    if (!accounts) return;
+    setWallet(accounts[0]);
   }
 
-  // if (!triedToEagerConnect) {
-  //   return null;
-  // }
-
-  if (!account) {
+  if (!wallet) {
     return (
-      <button
-        className="wallet-button"
-        disabled={connecting}
-        onClick={() => {
-          setConnecting(true);
-
-          activate(injected, undefined, true).catch(error => {
-            if (error instanceof UserRejectedRequestError) {
-              setConnecting(false);
-            } else {
-              setError(error);
-            }
-          });
-        }}
-      >
+      <button onClick={connectWallet} className="wallet-button">
         Connect Wallet
       </button>
     );
-  } else {
-    return (
-      <a className="wallet-button cursor-pointer">
-        {ENSName || shortenHex(account, 4)}
-      </a>
-    );
   }
+
+  return (
+    <a className="wallet-button bg-yellow text-black cursor-default">
+      {ENSName ? ENSName : shortenHex(wallet)}
+    </a>
+  );
 }

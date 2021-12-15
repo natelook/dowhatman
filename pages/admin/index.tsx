@@ -1,34 +1,97 @@
-import { ethers } from 'ethers';
-import requestAccount from '@lib/request-account';
-import DoWhatManNFT from '../../artifacts/contracts/NFT.sol/DoWhatManNFT.json';
+import { signer } from '@lib/providers';
+import useRequestAccount from '@hooks/useRequestAccount';
+import { useEffect, useState } from 'react';
+import { useRecoilValue } from 'recoil';
+import { walletState } from '@components/state';
+import nftContract, { MINT_CONTRACT_ADDRESS } from '@lib/nft-contract';
 
-const MINT_CONTRACT_ADDRESS = '0xdFfaF258d6589c61955eD43375bd6c2379199d1e';
+interface ContractInfoProps {
+  paused: boolean;
+  revealed: boolean;
+}
 
 export default function AdminPage() {
+  const [contractInfo, setContractInfo] = useState<ContractInfoProps | null>();
+  const [isOwner, setOwner] = useState(false);
+  const wallet = useRecoilValue(walletState);
+  const { requestAccount } = useRequestAccount();
+
+  useEffect(() => {
+    async function checkIfOwner() {
+      if (!wallet) {
+        requestAccount();
+      }
+
+      console.log(wallet);
+      if (wallet === '0xd4ed143f6b3e5cb2f366d270cf98715196df8d65') {
+        setOwner(true);
+      }
+    }
+
+    checkIfOwner();
+  }, [requestAccount, wallet]);
+
+  useEffect(() => {
+    async function fetchData() {
+      const paused = await nftContract().paused();
+      const revealed = await nftContract().revealed();
+      setContractInfo({
+        paused,
+        revealed,
+      });
+    }
+    fetchData();
+  }, []);
+
   async function withdraw() {
-    // @ts-ignore
-    if (typeof window.ethereum === 'underfined') return;
-    await requestAccount();
-    const provider = new ethers.providers.Web3Provider(window.ethereum);
-    const signer = provider.getSigner();
-    const contract = new ethers.Contract(
-      MINT_CONTRACT_ADDRESS,
-      DoWhatManNFT.abi,
-      signer,
+    const sign = await signer(window.ethereum);
+    const withdrawal = await nftContract(sign).withdraw();
+    console.log(withdrawal);
+  }
+
+  async function pause() {
+    const sign = await signer(window.ethereum);
+    const paused = await nftContract(sign).pause(
+      contractInfo?.paused ? false : true,
     );
-    const hello = await contract.withdraw();
-    console.log({ hello });
+  }
+
+  async function reveal() {
+    const sign = await signer(window.ethereum);
+    const revealed = await nftContract(sign).reveal();
+  }
+
+  if (isOwner) {
+    return (
+      <main>
+        <h1 className="mb-10">Admin Panel</h1>
+        <h2 className="text-center">Smart Contract Controls</h2>
+        {contractInfo && (
+          <div className="grid grid-cols-3 place-items-center">
+            <div>
+              <button className="btn" onClick={pause}>
+                {contractInfo.paused ? 'Resume' : 'Pause'}
+              </button>
+            </div>
+            <div>
+              <button className="btn" onClick={reveal}>
+                {contractInfo.revealed ? 'Unreveal' : 'Reveal'}
+              </button>
+            </div>
+            <div>
+              <button className="btn" onClick={withdraw}>
+                Withdraw
+              </button>
+            </div>
+          </div>
+        )}
+      </main>
+    );
   }
 
   return (
     <main>
-      <h1>Admin</h1>
-      <button
-        className="px-3 py-1 bg-yellow text-black rounded hover:bg-black hover:text-yellow border border-yellow transition duration-200"
-        onClick={withdraw}
-      >
-        Withdraw
-      </button>
+      <h1>Hey, you are not authorized.</h1>
     </main>
   );
 }

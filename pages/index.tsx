@@ -73,7 +73,7 @@ export default function Home() {
           <div className="grid grid-cols-4 mt-5 gap-x-7">
             <div className="space-y-3 text-xl col-span-3">
               <p>
-                Do What Man! was a product of need vs desire. in 2021, Rob had a
+                Do What Man! was a product of need vs desire. In 2021, Rob had a
                 stroke. This affected his way of living drastically. He now has
                 to relearn how to speak, walk, draw, write... everything. NFTs
                 have now given Rob the opportunity to share and distribute his
