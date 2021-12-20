@@ -11,15 +11,16 @@ export default function Home() {
   return (
     <main>
       <section>
-        <div className="h-screen flex items-center">
+        <div className="md:h-screen flex items-center">
           <div className="container">
-            <div className="flex justify-center items-center space-x-32">
+            <div className="flex flex-col md:flex-row pt-24 md:p-0 justify-center items-center md:space-x-32 pb-10">
               <HomeHeroText />
 
               <motion.div
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1, x: -20 }}
                 transition={{ duration: 0.5, delay: 0.8 }}
+                className="hidden md:block"
               >
                 <Image
                   src="/images-grid.png"
@@ -34,12 +35,12 @@ export default function Home() {
         </div>
       </section>
       <section className="bg-white text-black py-24">
-        <div className="max-w-3xl mx-auto">
-          <h3 className="text-7xl font-headings text-purple text-center">
+        <div className="max-w-3xl mx-auto px-5">
+          <h3 className="text-4xl md:text-7xl font-headings text-purple text-center">
             A Product of Need vs desire
           </h3>
-          <div className="flex justify-between mt-5">
-            <div>
+          <div className="flex flex-col md:flex-row justify-between mt-5">
+            <div className="md:block">
               <Image
                 src="/deezy1_nobg.png"
                 height="800px"
@@ -71,12 +72,12 @@ export default function Home() {
       </section>
 
       <section className="py-24">
-        <div className="max-w-3xl mx-auto">
-          <h3 className="text-7xl text-yellow font-headings text-center">
-            What is do what man!
+        <div className="max-w-3xl mx-auto px-5 md:px-0">
+          <h3 className="text-4xl md:text-7xl text-yellow font-headings text-center">
+            What is do what man!?
           </h3>
-          <div className="grid grid-cols-4 mt-5 gap-x-7">
-            <div className="space-y-3 text-xl col-span-3">
+          <div className="flex flex-col justify-between md:flex-row">
+            <div className="space-y-3 text-xl">
               <p>
                 Do What Man! was a product of need vs desire. In 2021, Rob had a
                 stroke. This affected his way of living drastically. He now has
@@ -93,9 +94,9 @@ export default function Home() {
             </div>
             <div className="">
               <Image
-                src="/bear_nobg_cropped_scaled.png"
-                height="261px"
-                width="150px"
+                src="/bear_nobg.png"
+                height="800px"
+                width="800px"
                 alt="Bear"
               />
             </div>

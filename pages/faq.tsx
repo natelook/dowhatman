@@ -18,9 +18,11 @@ export default function FAQPage({ faqs }: FAQPageProps) {
   const [expanded, setExpanded] = useState<false | string>(false);
   return (
     <div className="max-w-xl mx-auto">
-      <div className="flex justify-between mb-10">
-        <h1 className="pt-2 mb-10 text-yellow">Frequently Asked Questions</h1>
-        <div className="flex-grow relative w-96">
+      <div className="flex justify-between items-center md:items-start">
+        <h1 className="max-w-xs md:max-w-max pt-2 mb-10 text-yellow">
+          Frequently Asked Questions
+        </h1>
+        <div className="absolute right-0 md:relative w-40 md:w-96 ">
           <Image
             src="/deezy1_nobg.png"
             height="200px"
@@ -48,6 +50,5 @@ export async function getStaticProps() {
   const faqs = await sanity.fetch(groq`*[_type == 'faq'][0] {
     allFAQs
   }`);
-  console.log(faqs);
   return { props: { faqs } };
 }

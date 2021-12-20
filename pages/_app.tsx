@@ -9,6 +9,7 @@ import type {
 import { Web3Provider } from '@ethersproject/providers';
 import { RecoilRoot, useSetRecoilState } from 'recoil';
 import { useRouter } from 'next/router';
+import { motion } from 'framer-motion';
 
 function getLibrary(provider: ExternalProvider | JsonRpcFetchFunc) {
   console.log('getLibray Provider', { provider });
@@ -16,19 +17,33 @@ function getLibrary(provider: ExternalProvider | JsonRpcFetchFunc) {
 }
 
 function MyApp({ Component, pageProps }: AppProps) {
-  const { pathname } = useRouter();
+  const { pathname, route } = useRouter();
 
   return (
     <Web3ReactProvider getLibrary={getLibrary}>
       <RecoilRoot>
         <Layout>
-          {pathname !== '/' ? (
-            <div className="py-24 max-w-3xl mx-auto">
+          <motion.div
+            key={route}
+            initial="pageInitial"
+            animate="pageAnimate"
+            variants={{
+              pageInitial: {
+                opacity: 0,
+              },
+              pageAnimate: {
+                opacity: 1,
+              },
+            }}
+          >
+            {pathname !== '/' ? (
+              <div className="py-24 max-w-3xl mx-auto px-2">
+                <Component {...pageProps} />
+              </div>
+            ) : (
               <Component {...pageProps} />
-            </div>
-          ) : (
-            <Component {...pageProps} />
-          )}
+            )}
+          </motion.div>
         </Layout>
       </RecoilRoot>
     </Web3ReactProvider>
