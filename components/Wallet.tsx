@@ -5,9 +5,7 @@ import { useWeb3React } from '@web3-react/core';
 import { injected } from 'connectors';
 import { ethers } from 'ethers';
 import React, { useEffect } from 'react';
-import { useRecoilState } from 'recoil';
 import { shortenHex } from 'utils';
-import { walletState } from './state';
 
 export default function Wallet() {
   const { connectWallet, wallet, ENSName } = useWallet();

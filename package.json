@@ -12,10 +12,6 @@
   },
   "dependencies": {
     "@ethersproject/providers": "^5.5.1",
-    "@headlessui/react": "^1.4.2",
-    "@heroicons/react": "^1.0.5",
-    "@metamask/detect-provider": "^1.2.0",
-    "@metamask/onboarding": "^1.0.1",
     "@openzeppelin/contracts": "^4.4.0",
     "@sanity/block-content-to-react": "^3.0.0",
     "@sanity/client": "^2.21.7",
@@ -34,11 +30,7 @@
     "react": "17.0.2",
     "react-dom": "17.0.2",
     "react-icons": "^4.3.1",
-    "react-query": "^3.31.0",
-    "recoil": "^0.5.2",
-    "tailwindcss": "^2.2.19",
-    "web3": "^1.6.0",
-    "web3modal": "^1.9.4"
+    "tailwindcss": "^2.2.19"
   },
   "devDependencies": {
     "@nomiclabs/hardhat-waffle": "^2.0.1",

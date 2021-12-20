@@ -2,8 +2,7 @@ import React from 'react';
 import { AnimatePresence, motion } from 'framer-motion';
 import { MdExpandMore } from 'react-icons/md';
 import cn from 'classnames';
-import sanity, { PortableText } from '@lib/sanity';
-import groq from 'groq';
+import { PortableText } from '@lib/sanity';
 import { PortableTextEntry } from '@sanity/block-content-to-react';
 
 interface AccordionProps {

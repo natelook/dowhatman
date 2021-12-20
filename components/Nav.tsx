@@ -2,7 +2,6 @@ import { FaDiscord, FaTwitter } from 'react-icons/fa';
 import React, { useEffect, useState } from 'react';
 import Link from 'next/link';
 import SlideOver from './SlideOver';
-import Wallet from './Wallet';
 import LogoText from '@components/LogoText';
 import { useRouter } from 'next/router';
 import { motion } from 'framer-motion';
@@ -61,10 +60,6 @@ export default function Nav() {
     </React.Fragment>
   );
 }
-
-const hamburgerVariants = {
-  open: {},
-};
 
 function Hamburger({ isOpen }: { isOpen: boolean }) {
   return (

@@ -7,7 +7,6 @@ import type {
   JsonRpcFetchFunc,
 } from '@ethersproject/providers';
 import { Web3Provider } from '@ethersproject/providers';
-import { RecoilRoot, useSetRecoilState } from 'recoil';
 import { useRouter } from 'next/router';
 import { motion } from 'framer-motion';
 
@@ -21,31 +20,29 @@ function MyApp({ Component, pageProps }: AppProps) {
 
   return (
     <Web3ReactProvider getLibrary={getLibrary}>
-      <RecoilRoot>
-        <Layout>
-          <motion.div
-            key={route}
-            initial="pageInitial"
-            animate="pageAnimate"
-            variants={{
-              pageInitial: {
-                opacity: 0,
-              },
-              pageAnimate: {
-                opacity: 1,
-              },
-            }}
-          >
-            {pathname !== '/' ? (
-              <div className="py-24 max-w-3xl mx-auto px-2">
-                <Component {...pageProps} />
-              </div>
-            ) : (
+      <Layout>
+        <motion.div
+          key={route}
+          initial="pageInitial"
+          animate="pageAnimate"
+          variants={{
+            pageInitial: {
+              opacity: 0,
+            },
+            pageAnimate: {
+              opacity: 1,
+            },
+          }}
+        >
+          {pathname !== '/' ? (
+            <div className="py-24 max-w-3xl mx-auto px-2">
               <Component {...pageProps} />
-            )}
-          </motion.div>
-        </Layout>
-      </RecoilRoot>
+            </div>
+          ) : (
+            <Component {...pageProps} />
+          )}
+        </motion.div>
+      </Layout>
     </Web3ReactProvider>
   );
 }
