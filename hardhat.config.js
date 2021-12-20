@@ -22,15 +22,14 @@ module.exports = {
     hardhat: {
       chainId: 1337,
     },
-    ropsten: {
-      chainId: 3,
-      url: 'https://ropsten.infura.io/v3/5e52170a7c0e442b9152b7b34ca3f80d',
-      accounts: [process.env.PRIVATE_KEY],
-    },
+    // ropsten: {
+    //   chainId: 3,
+    //   url: 'https://ropsten.infura.io/v3/5e52170a7c0e442b9152b7b34ca3f80d',
+    //   accounts: [process.env.PRIVATE_KEY],
+    // },
     rinkeby: {
       chainId: 4,
       url: 'https://rinkeby.infura.io/v3/5e52170a7c0e442b9152b7b34ca3f80d',
-      accounts: [process.env.PRIVATE_KEY],
     },
   },
 };

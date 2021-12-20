@@ -1,5 +1,6 @@
 import { FaTwitter, FaDiscord } from 'react-icons/fa';
 import Link from 'next/link';
+import { motion } from 'framer-motion';
 
 export default function Footer() {
   return (

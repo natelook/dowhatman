@@ -21,6 +21,6 @@
       "@hooks/*": ["hooks/*"]
     }
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", "addition.d.ts"],
+  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", "addition.d.ts", "types"],
   "exclude": ["node_modules"]
 }

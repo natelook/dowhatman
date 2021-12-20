@@ -9,11 +9,9 @@ import type {
 import { Web3Provider } from '@ethersproject/providers';
 import { RecoilRoot, useSetRecoilState } from 'recoil';
 import { useRouter } from 'next/router';
-import { LayoutGroup } from 'framer-motion';
-import { useEffect } from 'react';
-import { walletState } from '@components/state';
 
 function getLibrary(provider: ExternalProvider | JsonRpcFetchFunc) {
+  console.log('getLibray Provider', { provider });
   return new Web3Provider(provider);
 }
 
@@ -21,21 +19,19 @@ function MyApp({ Component, pageProps }: AppProps) {
   const { pathname } = useRouter();
 
   return (
-    <LayoutGroup>
-      <Web3ReactProvider getLibrary={getLibrary}>
-        <RecoilRoot>
-          <Layout>
-            {pathname !== '/' ? (
-              <div className="py-24 max-w-3xl mx-auto">
-                <Component {...pageProps} />
-              </div>
-            ) : (
+    <Web3ReactProvider getLibrary={getLibrary}>
+      <RecoilRoot>
+        <Layout>
+          {pathname !== '/' ? (
+            <div className="py-24 max-w-3xl mx-auto">
               <Component {...pageProps} />
-            )}
-          </Layout>
-        </RecoilRoot>
-      </Web3ReactProvider>
-    </LayoutGroup>
+            </div>
+          ) : (
+            <Component {...pageProps} />
+          )}
+        </Layout>
+      </RecoilRoot>
+    </Web3ReactProvider>
   );
 }
 

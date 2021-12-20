@@ -3,6 +3,10 @@
 @tailwind components;
 @tailwind utilities;
 
+html {
+  margin-left: calc(100vw - 100%);
+}
+
 @layer base {
   body {
     @apply bg-black text-white overflow-x-hidden;
@@ -17,7 +21,7 @@
   }
 
   .wallet-button {
-    @apply bg-black border border-yellow text-yellow uppercase font-bold  text-sm rounded-md px-4 py-1 hover:text-black hover:bg-yellow transition duration-200;
+    @apply bg-black border border-yellow text-yellow uppercase font-bold  text-sm rounded-md px-4 py-1 hover:text-black hover:bg-yellow transition duration-200 cursor-pointer;
   }
 
   h1,

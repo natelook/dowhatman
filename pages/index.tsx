@@ -1,8 +1,13 @@
 import Image from 'next/image';
 import { motion } from 'framer-motion';
 import { HomeHeroText } from '@components/home';
+import { useWeb3React } from '@web3-react/core';
 
 export default function Home() {
+  const { chainId, account } = useWeb3React();
+
+  // console.log('Home Components', chainId, account);
+
   return (
     <main>
       <section>

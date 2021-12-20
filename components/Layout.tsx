@@ -9,7 +9,7 @@ import { walletState } from './state';
 const Layout: FC = ({ children }) => {
   const setWallet = useSetRecoilState(walletState);
   useEffect(() => {
-    console.log('Provider: ', ethers.getDefaultProvider(), window.ethereum);
+    // console.log('Provider: ', ethers.getDefaultProvider(), window.ethereum);
     if (typeof window.ethereum === undefined) return;
 
     window?.ethereum?.selectedAddress &&

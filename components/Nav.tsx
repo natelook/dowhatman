@@ -6,9 +6,31 @@ import Wallet from './Wallet';
 import LogoText from '@components/LogoText';
 import { useRouter } from 'next/router';
 
+const navLinks = [
+  {
+    name: 'Home',
+    slug: '/',
+  },
+  {
+    name: 'Mint',
+    slug: '/mint',
+  },
+  {
+    name: 'About',
+    slug: '/about',
+  },
+  {
+    name: 'Whitepaper',
+    slug: '/whitepaper',
+  },
+  {
+    name: 'FAQ',
+    slug: '/faq',
+  },
+];
+
 export default function Nav() {
   const [isMenuOpen, setMenuOpen] = useState(false);
-  const { pathname } = useRouter();
 
   return (
     <React.Fragment>
@@ -16,17 +38,21 @@ export default function Nav() {
         <div className="container mx-auto py-2">
           <div className="flex justify-between items-center">
             <div className="flex items-center space-x-3">
-              <div onClick={() => setMenuOpen(true)}>
-                <Hamburger />
-              </div>
-              {pathname !== '/' && (
-                <Link href="/">
-                  <a className="text-3xl mt-0.5 font-headings">
-                    <LogoText />
-                  </a>
-                </Link>
-              )}
+              <Link href="/">
+                <a className="text-3xl mt-0.5 font-headings">
+                  <LogoText />
+                </a>
+              </Link>
             </div>
+            <ul className="flex space-x-3 font-headings text-xl">
+              {navLinks.map(link => (
+                <li key={link.slug}>
+                  <Link href={link.slug}>
+                    <a className="hover:text-green">{link.name}</a>
+                  </Link>
+                </li>
+              ))}
+            </ul>
             <div className="text-2xl flex space-x-5 items-center">
               <Link href="https://discord.gg/kBH8EV53CG">
                 <a

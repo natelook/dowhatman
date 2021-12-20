@@ -5,21 +5,12 @@ import { FaDiscord } from 'react-icons/fa';
 export default function HomeHeroText() {
   return (
     <div className="text-center">
-      <motion.h1
-        initial={{ opacity: 0, y: -50 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ delay: 0.2, duration: 0.5 }}
-        className="text-green font-headings text-9xl "
-        layoutId="homeHeading"
-      >
-        <LogoText />
-      </motion.h1>
       <motion.div
         initial={{ opacity: 0, y: 50 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ delay: 0.5, duration: 0.5 }}
       >
-        <h3 className="text-3xl max-w-lg mx-auto">
+        <h3 className="text-6xl max-w-lg mx-auto">
           A collection to fulfill the needs and desires of others.
         </h3>
         <div className="flex justify-center mt-5">
