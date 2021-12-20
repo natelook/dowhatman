@@ -1,15 +1,14 @@
-import sanity from '@lib/sanity';
+import sanity, { PortableText } from '@lib/sanity';
 import groq from 'groq';
 import { GetServerSidePropsContext } from 'next';
-// @ts-ignore
-import BlockContent from '@sanity/block-content-to-react';
+import { PortableTextEntry } from '@sanity/block-content-to-react';
 import dayjs from 'dayjs';
 
 export interface PostProps {
   _id: string;
   title: string;
   slug: string;
-  body: string;
+  body: PortableTextEntry[];
   publishedAt: Date;
 }
 
@@ -27,7 +26,7 @@ export default function ArticlePage({ post }: PageProps) {
         </span>
       </div>
       <div className="prose">
-        <BlockContent blocks={post.body} />
+        <PortableText blocks={post.body} />
       </div>
     </article>
   );
