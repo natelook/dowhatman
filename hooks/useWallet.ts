@@ -2,12 +2,20 @@ import { useWeb3React } from '@web3-react/core';
 import { useState, useEffect } from 'react';
 import { injected } from 'connectors';
 import { Web3Provider } from '@ethersproject/providers';
+import { ethers } from 'ethers';
 
 export default function useWallet() {
   const [connectedWallet, setConnectedWallet] = useState<string | null>();
   const [ENSName, setENSName] = useState<string | null>();
 
   const { activate, active, account, library } = useWeb3React<Web3Provider>();
+
+  useEffect(() => {
+    const { ethereum } = window;
+    ethereum.on('disconnect', () => {
+      alert('Disconnected');
+    });
+  }, []);
 
   useEffect(() => {
     if (window.ethereum) {
@@ -24,23 +32,20 @@ export default function useWallet() {
   }, []);
 
   useEffect(() => {
-    if (connectedWallet && library) {
-      let stale = false;
-      library
-        .lookupAddress(connectedWallet)
-        .then(name => {
-          if (!stale && typeof name === 'string') {
-            setENSName(name);
-          }
-        })
-        .catch(() => {});
-
-      return () => {
-        stale = true;
-        setENSName('');
-      };
+    async function lookUpENS(wallet: string) {
+      const provider = new ethers.providers.Web3Provider(window.ethereum);
+      const ENS = await provider.lookupAddress(wallet);
+      setENSName(ENS);
     }
-  }, [connectedWallet, library]);
+
+    if (connectedWallet) {
+      lookUpENS(connectedWallet);
+    }
+
+    return () => {
+      setENSName('');
+    };
+  }, [connectedWallet]);
 
   useEffect(() => {
     if (active && account) {
@@ -50,7 +55,6 @@ export default function useWallet() {
   }, [active, account]);
 
   const connectWallet = () => {
-    console.log('hello');
     activate(injected, error => console.log(error), true).catch(error => {
       console.log('Connect Wallet Error: ', error);
     });

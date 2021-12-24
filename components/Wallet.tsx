@@ -1,10 +1,5 @@
-import useENSName from '@hooks/useENSName';
 import useWallet from '@hooks/useWallet';
-import requestAccount from '@lib/request-account';
-import { useWeb3React } from '@web3-react/core';
-import { injected } from 'connectors';
-import { ethers } from 'ethers';
-import React, { useEffect } from 'react';
+import React from 'react';
 import { shortenHex } from 'utils';
 
 export default function Wallet() {

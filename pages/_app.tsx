@@ -11,8 +11,9 @@ import { useRouter } from 'next/router';
 import { motion } from 'framer-motion';
 
 function getLibrary(provider: ExternalProvider | JsonRpcFetchFunc) {
-  console.log('getLibray Provider', { provider });
-  return new Web3Provider(provider);
+  const library = new Web3Provider(provider);
+
+  return library;
 }
 
 function MyApp({ Component, pageProps }: AppProps) {
