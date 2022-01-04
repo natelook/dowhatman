@@ -1,7 +1,5 @@
 import useContract from '@hooks/useContract';
 import useWallet from '@hooks/useWallet';
-import { ethers } from 'ethers';
-import { useEffect } from 'react';
 import cn from 'classnames';
 
 export default function AdminPage() {
