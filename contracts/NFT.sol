@@ -11,9 +11,9 @@ contract DoWhatManNFT is ERC721Enumerable, Ownable {
   string baseURI;
   string public baseExtension = ".json";
   uint256 public cost = 0.03 ether; // <-- Mint Cost
-  uint256 public maxSupply = 10; // <-- Max Number of NFTs
-  uint256 public maxMintAmount = 20;
-  bool public paused = false;
+  uint256 public maxSupply = 200; // <-- Max Number of NFTs
+  uint256 public maxMintAmount = 10;
+  bool public paused = true;
   bool public revealed = false;
   string public notRevealedUri;
 

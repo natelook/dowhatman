@@ -40,3 +40,5 @@ yarn-error.log*
 /artifacts
 /cache
 /nfts
+
+/keys.json

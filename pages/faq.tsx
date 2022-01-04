@@ -17,7 +17,7 @@ interface FAQPageProps {
 export default function FAQPage({ faqs }: FAQPageProps) {
   const [expanded, setExpanded] = useState<false | string>(false);
   return (
-    <div className="max-w-xl mx-auto">
+    <div className="max-w-xl mx-auto pb-60">
       <div className="flex justify-between items-center md:items-start">
         <h1 className="max-w-xs md:max-w-max pt-2 mb-10 text-yellow">
           Frequently Asked Questions

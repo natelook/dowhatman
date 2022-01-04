@@ -44,4 +44,8 @@ html {
   .btn {
     @apply px-3 py-1 bg-yellow text-black uppercase rounded hover:bg-black hover:text-yellow border border-yellow transition duration-200;
   }
+
+  .prose p {
+    @apply mb-4;
+  }
 }

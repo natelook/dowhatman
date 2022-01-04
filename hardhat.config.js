@@ -1,4 +1,5 @@
 require('@nomiclabs/hardhat-waffle');
+// const keys = require('./keys.json');
 
 // This is a sample Hardhat task. To learn how to create your own go to
 // https://hardhat.org/guides/create-task.html
@@ -30,6 +31,7 @@ module.exports = {
     rinkeby: {
       chainId: 4,
       url: 'https://rinkeby.infura.io/v3/5e52170a7c0e442b9152b7b34ca3f80d',
+      // accounts: [keys.privateKey],
     },
   },
 };

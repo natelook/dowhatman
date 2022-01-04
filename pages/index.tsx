@@ -1,8 +1,17 @@
 import Image from 'next/image';
 import { motion } from 'framer-motion';
 import { HomeHeroText } from '@components/home';
+import sanity, { PortableText } from '@lib/sanity';
+import groq from 'groq';
+import { PortableTextEntry } from '@sanity/block-content-to-react';
 
-export default function Home() {
+interface FAQProps {
+  _key: string;
+  title: string;
+  body: PortableTextEntry[];
+}
+
+export default function Home({ faq }: { faq: FAQProps }) {
   return (
     <main>
       <section>
@@ -17,30 +26,47 @@ export default function Home() {
                 transition={{ duration: 0.5, delay: 0.8 }}
                 className="hidden md:block"
               >
-                <Image
-                  src="/images-grid.png"
-                  height="600px"
-                  width="598px"
-                  alt="grid of images"
-                  priority
-                />
+                <motion.div
+                  initial={{ y: -10 }}
+                  animate={{ y: 10 }}
+                  transition={{
+                    repeat: Infinity,
+                    duration: 2,
+                    repeatType: 'reverse',
+                  }}
+                >
+                  <Image
+                    src="/deezy1_nobg.png"
+                    height="600px"
+                    width="600px"
+                    alt="deezy"
+                    priority
+                  />
+                </motion.div>
               </motion.div>
             </div>
           </div>
         </div>
       </section>
+
       <section className="bg-white text-black py-24">
-        <div className="max-w-3xl mx-auto px-5">
-          <h3 className="text-4xl md:text-7xl font-headings text-purple text-center">
+        <motion.div
+          initial={{ opacity: 0, y: 40 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, amount: 'all' }}
+          transition={{ delay: 0.3 }}
+          className="max-w-3xl mx-auto px-5"
+        >
+          <h3 className="text-4xl md:text-6xl font-headings text-purple text-center">
             A Product of Need vs desire
           </h3>
           <div className="flex flex-col md:flex-row justify-between mt-5">
             <div className="md:block">
               <Image
-                src="/deezy1_nobg.png"
-                height="800px"
-                width="800px"
-                alt="Deezy"
+                src="/bear_nobg.png"
+                height="600px"
+                width="600px"
+                alt="Bear created by Rob."
               />
             </div>
             <div className="space-y-3 text-grayText text-xl">
@@ -63,112 +89,86 @@ export default function Home() {
               </div>
             </div>
           </div>
+        </motion.div>
+      </section>
+      <section>
+        <div className="max-w-3xl mx-auto px-5 py-10">
+          <h3 className="text-4xl md:text-7xl text-green text-center">
+            THE NFTs
+          </h3>
         </div>
+        <motion.div
+          variants={{
+            open: {
+              transition: { staggerChildren: 0.07, delayChildren: 0.2 },
+            },
+          }}
+          initial="closed"
+          whileInView="open"
+          className="flex justify-evenly"
+        >
+          {[1, 2, 3, 4, 5].map(i => (
+            <NFT key={i} index={i} />
+          ))}
+        </motion.div>
       </section>
 
       <section className="py-24">
-        <div className="max-w-3xl mx-auto px-5 md:px-0">
-          <h3 className="text-4xl md:text-7xl text-yellow font-headings text-center">
+        <motion.div
+          initial={{ opacity: 0, y: -40 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, amount: 'all' }}
+          transition={{ delay: 0.5, duration: 0.5 }}
+          className="max-w-3xl mx-auto px-5 md:px-0"
+        >
+          <h3 className="text-4xl md:text-7xl text-yellow font-headings text-center mb-5">
             What is do what man!?
           </h3>
-          <div className="flex flex-col justify-between md:flex-row">
-            <div className="space-y-3 text-xl">
-              <p>
-                Do What Man! was a product of need vs desire. In 2021, Rob had a
-                stroke. This affected his way of living drastically. He now has
-                to relearn how to speak, walk, draw, write... everything. NFTs
-                have now given Rob the opportunity to share and distribute his
-                work in a way he was never able to in the past.
-              </p>
-              <p>
-                The initial collection will launch with 1,000 NFTs which will
-                grant you ownership to the Do What Man! DAO. This DAO will act
-                as a governance to display and distribute the work of other
-                artists who also have a need and a desire.
-              </p>
-            </div>
-            <div className="">
-              <Image
-                src="/bear_nobg.png"
-                height="800px"
-                width="800px"
-                alt="Bear"
-              />
+          <div className="">
+            <div className="space-y-3 text-xl prose">
+              <PortableText blocks={faq.body} />
             </div>
           </div>
-        </div>
+        </motion.div>
       </section>
     </main>
   );
 }
 
-const introVariants = {
-  hidden: {
-    opacity: 0,
-    y: -50,
-  },
-  visible: (i: number) => ({
-    opacity: 1,
-    y: 0,
-    transition: {
-      delay: i * 0.3,
-    },
-  }),
-};
-
-function IntroDoWhatManAnimations({
-  animationOver,
-}: {
-  animationOver: (isOver: boolean) => void;
-}) {
+function NFT({ index }: { index: number }) {
   return (
-    <div className="flex flex-col">
-      <motion.span
-        variants={introVariants}
-        initial="hidden"
-        animate="visible"
-        custom={0}
-        className="text-blue font-headings text-9xl "
-      >
-        DO WHAT MAN!
-      </motion.span>
-      <motion.span
-        variants={introVariants}
-        initial="hidden"
-        animate="visible"
-        custom={1}
-        className="text-yellow font-headings text-9xl "
-      >
-        DO WHAT MAN!
-      </motion.span>
-      <motion.span
-        variants={introVariants}
-        initial="hidden"
-        animate="visible"
-        custom={2}
-        className="text-pink font-headings text-9xl "
-      >
-        DO WHAT MAN!
-      </motion.span>
-      <motion.span
-        variants={introVariants}
-        initial="hidden"
-        animate="visible"
-        custom={3}
-        className="text-green font-headings text-9xl "
-      >
-        DO WHAT MAN!
-      </motion.span>
-      <motion.span
-        variants={introVariants}
-        initial="hidden"
-        animate="visible"
-        custom={4}
-        className="text-purple font-headings text-9xl"
-        onAnimationComplete={() => animationOver(true)}
-      >
-        DO WHAT MAN!
-      </motion.span>
-    </div>
+    <motion.div
+      className="relative"
+      whileHover={{
+        scale: 1.1,
+        zIndex: 10,
+        transition: { duration: 0.3, delay: 0.2 },
+      }}
+      viewport={{ once: true, amount: 'all' }}
+      variants={{
+        open: {
+          opacity: 1,
+          y: 0,
+        },
+        closed: {
+          opacity: 0,
+          y: -50,
+        },
+      }}
+    >
+      <Image
+        src={`/nfts/${index}.png`}
+        height="300px"
+        width="300px"
+        alt="test"
+      />
+    </motion.div>
   );
+}
+
+export async function getStaticProps() {
+  const faq = await sanity.fetch(groq`*[_type == 'faq'][0] {
+    allFAQs
+  }`);
+  return { props: { faq: faq.allFAQs[0] } };
 }

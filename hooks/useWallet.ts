@@ -32,6 +32,7 @@ export default function useWallet() {
   }, []);
 
   useEffect(() => {
+    if (window.ethereum.chainId !== '0x1') return;
     async function lookUpENS(wallet: string) {
       const provider = new ethers.providers.Web3Provider(window.ethereum);
       const ENS = await provider.lookupAddress(wallet);
@@ -47,6 +48,11 @@ export default function useWallet() {
     };
   }, [connectedWallet]);
 
+  async function getSigner() {
+    const provider = new ethers.providers.Web3Provider(window.ethereum);
+    return provider.getSigner();
+  }
+
   useEffect(() => {
     if (active && account) {
       setConnectedWallet(account);
@@ -60,5 +66,5 @@ export default function useWallet() {
     });
   };
 
-  return { connectWallet, wallet: connectedWallet, ENSName };
+  return { connectWallet, wallet: connectedWallet, ENSName, getSigner };
 }
