@@ -16,6 +16,7 @@ export default function MintPage() {
   const [mintAmount, setMintAmount] = useState(0);
   const [isMinted, setMinted] = useState(false);
   const { ENSName, wallet, connectWallet, getSigner } = useWallet();
+  const { isPaused } = useContract();
 
   console.log(ENSName, wallet);
 
@@ -75,7 +76,7 @@ export default function MintPage() {
               </h4>
               <a className="font-bold">{ENSName || shortenHex(wallet)}</a>
             </div>
-            {false ? (
+            {!isPaused ? (
               <MintUI
                 setMintAmount={setMintAmount}
                 mintAmount={mintAmount}

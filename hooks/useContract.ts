@@ -2,6 +2,7 @@ import DoWhatManNFT from '../artifacts/contracts/NFT.sol/DoWhatManNFT.json';
 import { ethers } from 'ethers';
 import { useEffect, useState } from 'react';
 import useWallet from './useWallet';
+import { infura } from '@lib/providers';
 
 const MINT_CONTRACT_ADDRESS = process.env.CONTRACT!;
 
@@ -52,8 +53,12 @@ export default function useContract() {
 
   useEffect(() => {
     async function getOwnerOfContract() {
-      if (!contract || !wallet) return;
-      const owner: string = await contract.owner();
+      const c = new ethers.Contract(
+        MINT_CONTRACT_ADDRESS,
+        DoWhatManNFT.abi,
+        infura,
+      );
+      const owner: string = await c.owner();
       setIsOwner(owner === wallet);
     }
 
@@ -62,8 +67,12 @@ export default function useContract() {
 
   useEffect(() => {
     async function checkIfRevealed() {
-      if (!contract || !wallet) return;
-      const revealed: boolean = await contract.revealed();
+      const c = new ethers.Contract(
+        MINT_CONTRACT_ADDRESS,
+        DoWhatManNFT.abi,
+        infura,
+      );
+      const revealed: boolean = await c.revealed();
       setIsRevealed(revealed);
     }
     checkIfRevealed();
@@ -71,8 +80,12 @@ export default function useContract() {
 
   useEffect(() => {
     async function checkIfPaused() {
-      if (!contract || !wallet) return;
-      const paused: boolean = await contract.paused();
+      const c = new ethers.Contract(
+        MINT_CONTRACT_ADDRESS,
+        DoWhatManNFT.abi,
+        infura,
+      );
+      const paused: boolean = await c.paused();
       setIsPaused(paused);
     }
     checkIfPaused();
