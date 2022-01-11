@@ -68,7 +68,7 @@ export default function MintPage() {
           <Link href="/faq">
             <a className="text-green">FAQ</a>
           </Link>{' '}
-          page our read the{' '}
+          page or read the{' '}
           <Link href="/story">
             <a className="text-green">story</a>
           </Link>
