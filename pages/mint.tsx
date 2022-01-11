@@ -1,7 +1,7 @@
 import useWallet from '@hooks/useWallet';
 import { ethers } from 'ethers';
-import React, { useEffect, useState } from 'react';
-import DoWhatManNFT from '../artifacts/contracts/NFT.sol/DoWhatManNFT.json';
+import React, { useState } from 'react';
+import DoWhatManNFT from '../artifacts/contracts/DoWhatManNFT.sol/DoWhatManNFT.json';
 import MintUI from '@components/mint/mint-ui';
 
 import { shortenHex } from 'utils';
@@ -61,10 +61,28 @@ export default function MintPage() {
           />
         )}
       </div>
+      <div className="mb-5">
+        <p>
+          Mint will begin on January 13th at 2 pm PST. The cost of mint will be
+          .04 ETH. If you have any questions please visit our{' '}
+          <Link href="/faq">
+            <a className="text-green">FAQ</a>
+          </Link>{' '}
+          page our read the{' '}
+          <Link href="/story">
+            <a className="text-green">story</a>
+          </Link>
+          .
+        </p>
+      </div>
       <div className="flex space-x-5">
         {!wallet ? (
           <div className="text-center flex w-full">
-            <button className="wallet-button" onClick={() => connectWallet()}>
+            <button
+              className="wallet-button"
+              disabled
+              onClick={() => connectWallet()}
+            >
               Connect Wallet
             </button>
           </div>

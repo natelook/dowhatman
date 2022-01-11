@@ -91,9 +91,6 @@ contract DoWhatManNFT is ERC721Enumerable, Ownable {
     cost = _newCost;
   }
 
-  function setMaxMintAmount(uint256 _newmaxMintAmount) public onlyOwner {
-    maxMintAmount = _newmaxMintAmount;
-  }
 
   function setNotRevealedURI(string memory _notRevealedURI) public onlyOwner {
     notRevealedUri = _notRevealedURI;

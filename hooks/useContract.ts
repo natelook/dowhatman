@@ -1,4 +1,4 @@
-import DoWhatManNFT from '../artifacts/contracts/NFT.sol/DoWhatManNFT.json';
+import DoWhatManNFT from '../artifacts/contracts/DoWhatManNFT.sol/DoWhatManNFT.json';
 import { ethers } from 'ethers';
 import { useEffect, useState } from 'react';
 import useWallet from './useWallet';

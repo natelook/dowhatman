@@ -16,8 +16,8 @@ export const navLinks = [
     slug: '/mint',
   },
   {
-    name: 'Whitepaper',
-    slug: '/whitepaper',
+    name: 'Story',
+    slug: '/story',
   },
   {
     name: 'FAQ',

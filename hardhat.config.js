@@ -1,4 +1,5 @@
 require('@nomiclabs/hardhat-waffle');
+require('@nomiclabs/hardhat-etherscan');
 // const keys = require('./keys.json');
 
 // This is a sample Hardhat task. To learn how to create your own go to
@@ -33,5 +34,8 @@ module.exports = {
       url: 'https://rinkeby.infura.io/v3/5e52170a7c0e442b9152b7b34ca3f80d',
       // accounts: [keys.privateKey],
     },
+  },
+  etherscan: {
+    apiKey: '1U35PAZ2JK2HX4X8B4F9HN9MJEG2NRMTVS',
   },
 };
