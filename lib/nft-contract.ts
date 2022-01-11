@@ -1,6 +1,6 @@
 import { infura } from '@lib/providers';
 import { ethers } from 'ethers';
-import DoWhatManNFT from '../artifacts/contracts/NFT.sol/DoWhatManNFT.json';
+import DoWhatManNFT from '../artifacts/contracts/DoWhatManNFT.sol/DoWhatManNFT.json';
 
 export const MINT_CONTRACT_ADDRESS =
   '0x1659BCb99359f2c1016Fe14685c3C0Db37CB2106';
