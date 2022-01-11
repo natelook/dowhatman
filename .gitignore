@@ -36,6 +36,9 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 
+# web3 stuff
 /artifacts
-/nfts
 /cache
+/nfts
+
+/keys.json

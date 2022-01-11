@@ -1,0 +1,51 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,400;0,700;1,400&family=Staatliches&display=swap');
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+html {
+  margin-left: calc(100vw - 100%);
+}
+
+@layer base {
+  body {
+    @apply bg-black text-white overflow-x-hidden;
+  }
+
+  .footer-link {
+    @apply text-green font-headings;
+  }
+
+  article p {
+    @apply mb-3 text-lg;
+  }
+
+  .wallet-button {
+    @apply bg-black border border-yellow text-yellow uppercase font-bold  text-sm rounded-md px-4 py-1 hover:text-black hover:bg-yellow transition duration-200 cursor-pointer;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    @apply font-headings;
+  }
+
+  h1 {
+    @apply text-6xl text-purple;
+  }
+
+  h2 {
+    @apply text-3xl text-green;
+  }
+
+  .btn {
+    @apply px-3 py-1 bg-yellow text-black uppercase rounded hover:bg-black hover:text-yellow border border-yellow transition duration-200;
+  }
+
+  .prose p {
+    @apply mb-4;
+  }
+}
