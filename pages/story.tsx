@@ -1,6 +1,14 @@
 import sanity, { PortableText } from '@lib/sanity';
+import { PortableTextEntry } from '@sanity/block-content-to-react';
 import groq from 'groq';
-import { PostProps } from './[slug]';
+
+export interface PostProps {
+  _id: string;
+  title: string;
+  slug: string;
+  body: PortableTextEntry[];
+  publishedAt: Date;
+}
 
 interface Props {
   story: PostProps;
