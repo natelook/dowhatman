@@ -8,12 +8,9 @@ const MINT_CONTRACT_ADDRESS = process.env.CONTRACT!;
 
 export default function useContract() {
   const [contractBalance, setContractBalance] = useState<string | null>();
-  const [isRevealed, setIsRevealed] = useState(false);
-  const [isOwner, setIsOwner] = useState(false);
+  const [isOwner, setIsOwner] = useState(true);
   const [contract, setContract] = useState<ethers.Contract | null>();
   const [isPaused, setIsPaused] = useState<boolean | null>();
-
-  console.log(typeof isPaused);
 
   const { wallet } = useWallet();
 
@@ -66,19 +63,6 @@ export default function useContract() {
   }, [contract, wallet]);
 
   useEffect(() => {
-    async function checkIfRevealed() {
-      const c = new ethers.Contract(
-        MINT_CONTRACT_ADDRESS,
-        DoWhatManNFT.abi,
-        infura,
-      );
-      const revealed: boolean = await c.revealed();
-      setIsRevealed(revealed);
-    }
-    checkIfRevealed();
-  }, [contract, wallet]);
-
-  useEffect(() => {
     async function checkIfPaused() {
       const c = new ethers.Contract(
         MINT_CONTRACT_ADDRESS,
@@ -97,14 +81,6 @@ export default function useContract() {
     console.log(withdrawFromContract);
   };
 
-  const reveal = async () => {
-    if (!contract || !wallet) return;
-    const revealNFTs = await contract.reveal();
-    await revealNFTs.wait();
-    console.log(revealNFTs);
-    setIsRevealed(true);
-  };
-
   const pause = async () => {
     if (!contract || !wallet) return;
     const pauseSale = await contract.pause(!isPaused);
@@ -117,8 +93,6 @@ export default function useContract() {
     contract,
     withdraw,
     isOwner,
-    isRevealed,
-    reveal,
     isPaused,
     pause,
   };

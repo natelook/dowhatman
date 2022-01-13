@@ -11,18 +11,14 @@ contract DoWhatManNFT is ERC721Enumerable, Ownable {
   string baseURI;
   string public baseExtension = ".json";
   uint256 public cost = 0.03 ether; // <-- Mint Cost
-  uint256 public maxSupply = 200; // <-- Max Number of NFTs
+  uint256 public maxSupply = 205; // <-- Max Number of NFTs
   uint256 public maxMintAmount = 10;
   bool public paused = true;
-  bool public revealed = false;
-  string public notRevealedUri;
 
   constructor(
-    string memory _initBaseURI,
-    string memory _initNotRevealedUri
+    string memory _initBaseURI
   ) ERC721 ("DO WHAT MAN!", "DOWHATMAN") {
     setBaseURI(_initBaseURI);
-    setNotRevealedURI(_initNotRevealedUri);
   }
 
   function _baseURI() internal view virtual override returns (string memory) {
@@ -71,9 +67,6 @@ contract DoWhatManNFT is ERC721Enumerable, Ownable {
       "ERC721Metadata: URI query for nonexistent token"
     );
 
-    if (!revealed) {
-      return notRevealedUri;
-    }
 
     string memory currentBaseURI = _baseURI();
     return bytes(currentBaseURI).length > 0
@@ -82,18 +75,8 @@ contract DoWhatManNFT is ERC721Enumerable, Ownable {
       ) : "";
   }
 
-  // only owner
-  function reveal() public onlyOwner() {
-    revealed = true;
-  }
-
   function setCost(uint256 _newCost) public onlyOwner {
     cost = _newCost;
-  }
-
-
-  function setNotRevealedURI(string memory _notRevealedURI) public onlyOwner {
-    notRevealedUri = _notRevealedURI;
   }
 
   function setBaseURI(string memory _newBaseURI) public onlyOwner {

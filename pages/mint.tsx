@@ -14,11 +14,11 @@ const MINT_CONTRACT_ADDRESS = process.env.CONTRACT!;
 export default function MintPage() {
   const [isMinting, setMinting] = useState(false);
   const [mintAmount, setMintAmount] = useState(0);
-  const [isMinted, setMinted] = useState(false);
+  const [transactionHash, setTransactionHash] = useState<
+    string | null | undefined
+  >();
   const { ENSName, wallet, connectWallet, getSigner } = useWallet();
   const { isPaused } = useContract();
-
-  console.log(ENSName, wallet);
 
   async function mint() {
     const price = 0.03;
@@ -35,22 +35,32 @@ export default function MintPage() {
     const amount = mintAmount;
 
     setMinting(true);
-    const transaction = await contract.mint(amount, {
+    const tx: { value: ethers.BigNumber } = {
       value: ethers.utils.parseEther(`${amount * price}`),
-      gasLimit: 300000 * amount,
-    });
+    };
+    const transaction = await contract.mint(amount, tx);
+
     console.log('After Transaction');
-    console.log({ transaction });
     const tdata = await transaction.wait();
     console.log({ tdata });
-    setMinted(true);
+    setTransactionHash(tdata.transactionHash);
     setMinting(false);
   }
 
   return (
     <main>
       <div className="flex justify-between">
-        <h1 className="mb-10 text-yellow">Mint</h1>
+        <div className="mb-10">
+          <h1 className="text-yellow">Mint</h1>
+          <a
+            href={`https://etherscan.io/address/${process.env.CONTRACT}`}
+            rel="noreferrer"
+            target="_blank"
+            className="block text-sm uppercase font-bold tracking-wider transition duration-200 hover:text-blue"
+          >
+            View Contract
+          </a>
+        </div>
         {wallet && (
           <Image
             src="/bear_nobg.png"
@@ -100,7 +110,7 @@ export default function MintPage() {
                 mintAmount={mintAmount}
                 mint={mint}
                 isMinting={isMinting}
-                isMinted={isMinted}
+                transactionHash={transactionHash}
               />
             ) : (
               <div className="text-center space-y-5 mt-5">

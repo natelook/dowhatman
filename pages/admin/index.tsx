@@ -3,15 +3,7 @@ import useWallet from '@hooks/useWallet';
 import cn from 'classnames';
 
 export default function AdminPage() {
-  const {
-    contractBalance,
-    withdraw,
-    isOwner,
-    isRevealed,
-    reveal,
-    isPaused,
-    pause,
-  } = useContract();
+  const { contractBalance, withdraw, isOwner, isPaused, pause } = useContract();
   const { wallet, connectWallet } = useWallet();
 
   console.log({ isPaused });
@@ -25,16 +17,6 @@ export default function AdminPage() {
           <div className="flex flex-col space-y-5">
             <button className="btn font-bold" onClick={withdraw}>
               Withdraw {contractBalance} eth
-            </button>
-            <button
-              className={cn('btn font-bold', {
-                'bg-yellow': !isRevealed,
-                'bg-green border-green hover:text-green': isRevealed,
-              })}
-              onClick={reveal}
-              disabled={isRevealed}
-            >
-              {!isRevealed ? 'Reveal' : 'Project is revealed'}
             </button>
             {typeof isPaused === 'boolean' && (
               <button
